@@ -6,18 +6,26 @@
   const down = () => (out.scrollTop = out.scrollHeight);
   const P = (t, c) => { const d = document.createElement("div"); if (c) d.className = c; d.textContent = t; out.append(d); down(); };
   const L = (t, href) => { const d = document.createElement("div"), a = document.createElement("a"); a.textContent = t; a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer"; d.append(a); out.append(d); down(); };
+  const projs = () => (typeof PROJECTS !== "undefined" ? PROJECTS : []);
 
   const C = {
     ajuda() {
       P("comandos disponíveis:", "h");
-      [["projetos", "meus trabalhos no ar"], ["servicos", "o que eu faço"], ["stack", "tecnologias que uso"], ["sobre", "quem sou eu"], ["contato", "falar comigo no WhatsApp"], ["preco", "quanto custa"], ["perf", "medidas reais desta página"], ["neofetch", "ficha técnica do site"], ["limpar", "limpa a tela"]].forEach(([a, b]) => P("  " + a.padEnd(10) + b));
+      [["projetos", "meus trabalhos no ar"], ["app", "baixar o app Destiny (Android)"], ["servicos", "o que eu faço"], ["stack", "tecnologias que uso"], ["sobre", "quem sou eu"], ["contato", "falar comigo no WhatsApp"], ["preco", "quanto custa"], ["perf", "medidas reais desta página"], ["neofetch", "ficha técnica do site"], ["limpar", "limpa a tela"]].forEach(([a, b]) => P("  " + a.padEnd(10) + b));
     },
     projetos() {
-      (typeof PROJECTS !== "undefined" ? PROJECTS : []).forEach((p) => { P(`▸ ${p.nome} (${p.categoria})`, "h"); if (p.url) L("  " + p.url, p.url); });
+      projs().forEach((p) => { P(`▸ ${p.nome} (${p.categoria})`, "h"); if (p.resumo) P("  " + p.resumo, "u"); if (p.url) L("  " + p.url, p.url); });
     },
-    servicos() { ["sites e landing pages", "catálogos com pedido pelo WhatsApp", "aplicações web sob medida", "bots e automações"].forEach((s) => P("▸ " + s)); },
-    stack() { P("HTML · CSS · JavaScript · Node.js · Cloudflare · WhatsApp"); },
-    sobre() { P("Rafael Campos, desenvolvedor web."); P("Sites, catálogos, apps e bots sob medida, em HTML, CSS e JS puros. Você recebe o valor antes de eu começar."); },
+    app() {
+      const a = projs().find((p) => p.tipo === "app");
+      if (!a) return P("Nenhum app publicado ainda.", "e");
+      P(`▸ ${a.nome}`, "h"); if (a.resumo) P("  " + a.resumo);
+      L("→ baixar o APK", a.url);
+      if (a.codigo) L("→ código-fonte (GitHub)", a.codigo);
+    },
+    servicos() { ["sites e landing pages", "catálogos com pedido pelo WhatsApp", "aplicações web e apps Android sob medida", "bots e automações"].forEach((s) => P("▸ " + s)); },
+    stack() { P("HTML · CSS · JavaScript · Node.js · Kotlin · Cloudflare · WhatsApp"); },
+    sobre() { P("Rafael Campos, desenvolvedor web."); P("Sites, catálogos, apps Android e bots sob medida. Sites em HTML, CSS e JS puros. Você recebe o valor antes de eu começar."); },
     contato() {
       P("Conte a ideia e receba o valor antes de começar.");
       L("→ abrir WhatsApp", wa("Olá! Vim pelo terminal do seu site e quero um orçamento."));
@@ -36,7 +44,7 @@
     },
     limpar() { out.textContent = ""; },
   };
-  const alias = { help: "ajuda", ls: "projetos", clear: "limpar", whoami: "sobre", orcamento: "contato", contratar: "contato", "preço": "preco", valor: "preco" };
+  const alias = { help: "ajuda", ls: "projetos", clear: "limpar", whoami: "sobre", orcamento: "contato", contratar: "contato", "preço": "preco", valor: "preco", destiny: "app", apk: "app", download: "app", servicos: "servicos", "serviços": "servicos" };
   const hist = []; let hi = 0;
 
   function run(raw) {
@@ -45,7 +53,7 @@
     P("$ " + v, "u");
     const k = alias[v] || v;
     if (k === "sudo" || k.startsWith("sudo ")) return P("boa tentativa. Aqui quem manda é o cliente.");
-    C[k] ? C[k]() : P(`comando não encontrado: ${v}. Digite ajuda.`, "e");
+    Object.prototype.hasOwnProperty.call(C, k) ? C[k]() : P(`comando não encontrado: ${v}. Digite ajuda.`, "e");
   }
 
   form.addEventListener("submit", (e) => { e.preventDefault(); run(inp.value); inp.value = ""; });
