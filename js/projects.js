@@ -18,9 +18,23 @@ const CONFIG = {
 //   formato: "app"              (a imagem não é cortada)
 const PROJECTS = [
   {
+    nome: "Solar Viva Viva",
+    tipo: "site",
+    destaque: true,
+    categoria: "Site com Painel Administrativo",
+    resumo: "Site para casa de festas com CMS próprio para gerenciar conteúdos, fotos, textos e temas sazonais.",
+    descricao: "Site institucional para um castelo de festas em São Gonçalo. Inclui galeria dinâmica, comunicados, letreiro animado, promoções e um painel administrativo completo (CMS) para a proprietária atualizar o site sem precisar de programador.",
+    desafio: "Criar uma presença online elegante que destacasse a arquitetura única (um castelo) e permitisse que a proprietária gerenciasse todo o conteúdo sozinha, sem custos mensais altos de plataformas de CMS prontas.",
+    solucao: "Desenvolvimento de um site estático de alta performance na Cloudflare Pages, integrado com Workers, banco D1 e R2 para criar um CMS personalizado. Inclui troca de temas visuais (Natal, Ano Novo), galeria gerenciável e painel administrativo seguro.",
+    tech: ["HTML", "CSS", "JavaScript", "Cloudflare Pages", "Cloudflare D1", "Cloudflare R2", "Cloudflare Workers"],
+    imagem: "assets/solar-viva-viva.webp",
+    url: "https://solarvivaviva.com.br",
+    acao: "Visitar o site",
+    pedido: "Quero um site com painel próprio"
+  },
+  {
     nome: "Destiny: baixador de vídeos e áudios",
     tipo: "app",
-    destaque: true,
     categoria: "App Android",
     formato: "app",
     resumo: "App Android gratuito e de código aberto para baixar vídeos e áudios de mais de 1000 sites.",
@@ -46,19 +60,6 @@ const PROJECTS = [
     imagem: "assets/dominique.webp",
     url: "https://dominique.rafaelcamposcontato7.workers.dev/",
     pedido: "Quero um catálogo parecido"
-  },
-  {
-    nome: "Restaurante e Lanchonete da Sombra",
-    tipo: "site",
-    categoria: "Landing page para restaurante",
-    resumo: "Site de restaurante na RJ-124 com cardápio interativo, horário de funcionamento e pedido pelo WhatsApp.",
-    descricao: "Site de um restaurante de beira de estrada em Rio Bonito (RJ): almoço caseiro na lenha, lanches e petiscos, com cardápio completo e pedido pelo WhatsApp.",
-    desafio: "Deixar claro logo de cara que o almoço é caseiro e que não há janta, e facilitar a vida de quem está de passagem pela RJ-124.",
-    solucao: "Indicador de horário de funcionamento, cardápio com busca e botão + para montar o pedido, cardápio impresso para ampliar, avaliações do Google e rota até o local.",
-    tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
-    imagem: "assets/sombra.webp",
-    url: "https://camposeb.github.io/Lanchonete-da-sombra/",
-    pedido: "Quero um site parecido"
   },
   {
     nome: "Página surpresa de aniversário",
